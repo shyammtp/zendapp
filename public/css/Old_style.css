@@ -1,0 +1,41 @@
+body { margin: 0; padding: 0;
+}
+
+.zf-green {
+    color: #68b604;
+}
+
+.btn-success {
+  background-color: #57a900;
+  background-image: -moz-linear-gradient(top, #70d900, #57a900);
+  background-image: -ms-linear-gradient(top, #70d900, #57a900);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#70d900), to(#57a900));
+  background-image: -webkit-linear-gradient(top, #70d900, #57a900);
+  background-image: -o-linear-gradient(top, #70d900, #57a900);
+  background-image: linear-gradient(top, #70d900, #57a900);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#70d900', endColorstr='#57a900', GradientType=0);
+}
+
+.btn-success:hover,
+.btn-success:active,
+.btn-success.active,
+.btn-success.disabled,
+.btn-success[disabled] {
+  background-color: #57a900;
+}
+
+.btn-success:active, .btn-success.active {
+  background-color: #57a900;
+}
+
+div.container a.brand {
+    background: url("../img/zf2-logo.png") no-repeat scroll 0 10px transparent;
+    margin-left: 0;
+    padding: 8px 20px 12px 40px;
+} 
+
+.bg_drop{background: url('../img/Admin/bg_drop.jpg') no-repeat; height: 100%; width: 100%; background-size:1370px; position: fixed;}
+
+.login{ width:40%; margin: 0 auto; padding:40px 20px 20px 20px;  background: rgba(36,45,42,0.9);}
+.field-error{list-style: none;margin:4px 0; padding: 0;}
+.field-error li.error-message{color:red; font-size: 12px;}
