@@ -14,5 +14,19 @@ if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['RE
 // Setup autoloading
 require 'init_autoloader.php';
 
-// Run the application!
-Zend\Mvc\Application::init(require 'config/application.config.php')->run();
+define('SITE_ROOT', getcwd());
+
+$siteCore = SITE_ROOT.'/site.php';
+
+if(!file_exists($siteCore))
+{
+    die("Error: Application Core file not found");
+}
+
+require $siteCore;
+
+Site::run();
+
+
+
+
