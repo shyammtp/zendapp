@@ -32,7 +32,7 @@ class Functions extends AbstractActionController
     
     public function getLocale()
     {
-        $s = $this->getServiceLocator()->get('config');
+        //$s = $this->getServiceLocator()->get('config');
         print_r('ad');
     }
 }

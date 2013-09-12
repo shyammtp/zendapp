@@ -15,7 +15,7 @@ class AbstractController extends Corefunction
     
     public function getCountryTable()
     {
-        $this->getServiceLocator()->get('Core\Model\Functions');
+         
         if (!$this->_countryTable) {
             $sm = $this->getServiceLocator();
             $this->_countryTable = $sm->get('Core\Model\Country');

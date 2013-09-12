@@ -43,12 +43,7 @@ class Module
                 'countryGateway' => function($sm){
                     $dbAdapter = $sm->get('Zend_Db_Adapter'); 
                     return new TableGateway('country_region', $dbAdapter);
-                },
-                'Core\Model\Functions' => function($sm){ 
-                    $model = new \Core\Model\Functions(); 
-                    $model->setServiceLocator($sm); 
-                    return $model;
-                },
+                }, 
             ),
         );
     }

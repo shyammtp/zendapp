@@ -19,10 +19,11 @@ class GeneralController extends CoreController
     { 
         $countrys = $this->getCountryTable()->fetchAll();
         $bind = array('countrys' => $countrys,
-                    'workingdays' => $this->workingDays);
+                    'workingdays' => $this->workingDays,
+                    'locale' => \Site::getLocale(),
+                    'timezone' => \Site::getTimezones());
         $view = new ViewModel($bind);
-        
-        \Site::getLocale();
+         
         $view->setTemplate('admin/settings/general/index');
         return $view;
     }
