@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -9,41 +9,83 @@
 
 namespace Admin\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Core\Controller\AbstractController as CoreController; 
 use Admin\Form\LoginForm; 
 use Admin\Model\Login; 
 
-class AdminController extends AbstractActionController
+class AdminController extends CoreController
 { 
     protected $adminTable;
     protected $_loginModel;
+    protected $authservice;
+    protected $storage;
     
+    protected function _getAuthService()
+    {
+        if (!$this->authservice) {
+            $this->authservice = $this->getServiceLocator()
+                                      ->get('AuthService');
+        } 
+        return $this->authservice;
+    }
+    
+    protected function getSessionStorage()
+    {
+        if (! $this->storage) {
+            $this->storage = $this->getServiceLocator()
+                                  ->get('Admin\Model\Login\AuthStorage');
+        }  
+        return $this->storage;
+    }
+     
+     
     public function indexAction()
-    { 
-        $form = new LoginForm();
+    {
+        if ($this->_getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('dashboard');
+        }
+        $this->layout('layout/loginlayout');
+        $form = new LoginForm(); 
         $request = $this->getRequest();
         if ($request->isPost()) {
             
-            $login = $this->getLoginModel();
+            $login = $this->getLoginModel(); 
             $form->setInputFilter($login->getInputFilter());
             $form->setData($request->getPost());
-            $this->flashMessenger()->addMessage('Thank you for your comment!');
-            if ($form->isValid()) {
+            
+            if($form->isValid()) {
                 try
                 {
-                    $login->checkUserExists();
-                    $login->exchangeArray($form->getData()); 
-                    return $this->redirect()->toRoute('admin');
-                }catch(\Exception $ex)
+                    $this->getAdminTable()->checkLogin($request->getPost('username'),
+                                                       $request->getPost('password')); 
+                    $login->exchangeArray($form->getData());
+                    $this->_getAuthService()->getAdapter()
+                                       ->setIdentity($request->getPost('username'))
+                                       ->setCredential($request->getPost('password'));
+                    $result = $this->_getAuthService()->authenticate();
+                    if ($result->isValid()) {
+                        $this->_getAuthService()->getStorage()->write($request->getPost('username'));
+                        $this->flashMessenger()->addSuccessMessage('Logged successfully');
+                        return $this->redirect()->toRoute('dashboard');
+                    }
+                }
+                catch(\Exception $ex)
                 {
-                    
+                    $this->flashMessenger()->addErrorMessage('User / Password not exists');
+                    $this->redirect()->toRoute('admin');
                 }
             }
         }
-        return array('form' => $form,
-                     'user' => $this->getAdminTable()->getUser(1),
-                     'flashMessages' => $this->flashMessenger()->getMessages());
+        return array('form' => $form, 
+                     'flashSuccessMessages' => $this->flashMessenger()->getSuccessMessages(), 
+                     'flashErrorMessages' => $this->flashMessenger()->getErrorMessages());
+    }
+    
+    public function logoutAction()
+    { 
+        $this->_getAuthService()->clearIdentity(); 
+        $this->flashmessenger()->addMessage("You've been logged out");
+        return $this->redirect()->toRoute('admin');
     }
     
     public function getAdminTable()

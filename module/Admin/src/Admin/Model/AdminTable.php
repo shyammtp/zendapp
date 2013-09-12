@@ -18,6 +18,16 @@ class AdminTable
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
+    
+    public function checkLogin($username, $password)
+    {
+        $rowset = $this->tableGateway->select(array('username' => $username,'password' => md5($password)));
+        $row = $rowset->current();        
+        if (!$row) {
+            throw new \Exception("Could not find row record");
+        }
+        return row;
+    }
 
     public function getUser($id)
     {

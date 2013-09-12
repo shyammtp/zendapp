@@ -15,7 +15,7 @@ class LoginForm extends Form
             'type' => 'Text',
             'attributes' => array(
                 'id' =>'inputEmail1',
-                'class' => 'form-control',
+                'class' => 'm-wrap placeholder-no-fix',
                 'placeholder' => 'Username'
             )
         ));
@@ -25,7 +25,7 @@ class LoginForm extends Form
             'type' => 'Password',
             'attributes' => array(
                 'id' =>'inputPassword1',
-                'class' => 'form-control',
+                'class' => 'm-wrap placeholder-no-fix',
                 'placeholder' => 'Password'
             )
         ));

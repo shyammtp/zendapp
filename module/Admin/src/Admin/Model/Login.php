@@ -6,7 +6,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class Login implements InputFilterAwareInterface
+class Login  implements InputFilterAwareInterface
 {
     public $username;
     public $password; 
@@ -25,11 +25,10 @@ class Login implements InputFilterAwareInterface
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
-    }
+    } 
 
     public function getInputFilter()
     {
-        
         if (!$this->inputFilter) {
             $inputFilter = new InputFilter(); 
 
@@ -50,7 +49,7 @@ class Login implements InputFilterAwareInterface
                             'message' => '%value% Test', 
                         ),              
                     ),
-                    array(
+                    /*array(
                         'name'    => 'Db\RecordExists',
                         'options' => array(
                             'table' => 'admin_user',
@@ -58,7 +57,7 @@ class Login implements InputFilterAwareInterface
                             'adapter' => $this->getDbAdapter(),
                             'message' => '%value% is not found in our record',
                         ),
-                    ),
+                    ),*/
                 ),
             ));
 
@@ -78,14 +77,14 @@ class Login implements InputFilterAwareInterface
                             'max'      => 100,
                         ),
                     ),
-                    array(
+                   /* array(
                         'name'    => 'Db\RecordExists',
                         'options' => array(
                             'table' => 'admin_user',
                             'field' => 'password',
                             'adapter' => $this->getDbAdapter(),
                         ),
-                    ),
+                    ),*/
                 ),
             ));
 
@@ -97,6 +96,7 @@ class Login implements InputFilterAwareInterface
     
     public function checkUserExists()
     {
+        return $this->countRecord();
         return false;
     }
     

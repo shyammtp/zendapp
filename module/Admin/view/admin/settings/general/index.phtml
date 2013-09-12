@@ -1,0 +1,426 @@
+<?php
+ $this->headLink()->appendStylesheet($this->basePath().'/plugins/select2/select2_metro.css')
+ ->appendStylesheet($this->basePath().'/plugins/chosen-bootstrap/chosen/chosen.css')
+ ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
+ ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
+ ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
+ ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
+ ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
+ ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
+ ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css');?>
+ <?php
+ $countries = array();
+ foreach($countrys as $country):?>
+ <?php $countries[] = array('code' => $country->code,'default_name' => $country->default_name); ?> 
+ <?php endforeach;?>
+<div class="page-header-fixed"> 
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+		<!-- BEGIN PAGE -->
+                <div class="page-content">
+                    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<div id="portlet-config" class="modal hide">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button"></button>
+					<h3>portlet Settings</h3>
+				</div>
+				<div class="modal-body">
+					<p>Here will be a configuration form</p>
+				</div>
+			</div>
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN PAGE CONTAINER-->
+			<div class="container-fluid">
+				<!-- BEGIN PAGE HEADER-->   
+				<div class="row-fluid scroller_anchor">
+					<div class="span12">  
+						<h3 class="page-title">
+							Settings / General settings
+							 <small>advance form layout samples</small>
+						</h3>
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home"></i>
+								<a href="index.html">Home</a> 
+								<span class="icon-angle-right"></span>
+							</li>
+							<li>
+								<a href="#">Form Stuff</a>
+								<span class="icon-angle-right"></span>
+							</li>
+							<li><a href="#">Form Layouts</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- END PAGE HEADER-->
+				
+				<div class="row-fluid fixedButton">
+						     <div class="form-actions" style="margin-top:0; border: none;">
+							 <button type="submit" class="btn blue" style="float: right;">Submit</button>
+							 <button type="button" class="btn" style="float: right; margin-right: 5px;">Cancel</button>                            
+						 </div>
+				</div>
+				<!-- BEGIN PAGE CONTENT-->
+				<div class="row-fluid">
+					<div class="span12"> 
+						<div class="portlet box blue">
+							<div class="portlet-title">
+								<div class="caption"><i class="icon-reorder"></i>Country options</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"></a>
+									<a href="#portlet-config" data-toggle="modal" class="config"></a>
+									<a href="javascript:;" class="reload"></a>
+									<a href="javascript:;" class="remove"></a>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<!-- BEGIN FORM-->
+								<form action="#" class="form-horizontal">
+									<div class="control-group">
+										<label class="control-label">Default country</label>
+																				<div class="controls">
+											<select data-placeholder="Your Default Country" class="chosen span6" tabindex="-1" id="selS0V" name="settings[general][default_country]">
+												<option value=""></option>
+												<?php foreach($countries as $country):?>
+                                                                                                <option value="<?php echo $country['code'];?>"><?php echo $country['default_name'];?></option>
+												<?php endforeach;?> 
+											</select>
+										</div>
+
+									</div>
+									<div class="control-group">
+										<label class="control-label">Allowed countries</label>
+																				<div class="controls">
+											<select data-placeholder="Choose country" class="chosen span6" multiple="multiple" tabindex="6" name="settings[general][allowed_country]">
+												<option value=""></option>
+												<?php foreach($countries as $country):?>
+                                                                                                <option value="<?php echo $country['code'];?>"><?php echo $country['default_name'];?></option>
+												<?php endforeach;?> 
+											</select>
+										</div>
+
+									</div>
+									 
+									
+								</form>
+								<!-- END FORM-->       
+							</div>
+						</div>
+
+					</div>
+				</div>
+                                
+                                <!--2-->
+                                    <div class="row-fluid">
+					<div class="span12"> 
+						<div class="portlet box green">
+							<div class="portlet-title">
+								<div class="caption"><i class="icon-reorder"></i>Locale options</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"></a>
+									<a href="#portlet-config" data-toggle="modal" class="config"></a>
+									<a href="javascript:;" class="reload"></a>
+									<a href="javascript:;" class="remove"></a>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<!-- BEGIN FORM-->
+								<form action="#" class="form-horizontal">
+									<div class="control-group">
+										<label class="control-label">TimeZone</label>
+                                                                                    <div class="controls">
+											<select data-placeholder="Your Favorite Football Team" class="chosen span6" tabindex="-1" id="selS1F" name="settings[general][allowed_country]">
+												<option value=""></option>
+												
+<option value="Australia/Darwin">AUS Central Standard Time (Australia/Darwin)</option>
+<option value="Australia/Sydney">AUS Eastern Standard Time (Australia/Sydney)</option>
+<option value="Asia/Kabul">Afghanistan Standard Time (Asia/Kabul)</option>
+<option value="America/Anchorage">Alaskan Standard Time (America/Anchorage)</option>
+<option value="Asia/Riyadh">Arab Standard Time (Asia/Riyadh)</option>
+<option value="Asia/Dubai">Arabian Standard Time (Asia/Dubai)</option>
+<option value="Asia/Baghdad">Arabic Standard Time (Asia/Baghdad)</option>
+<option value="America/Buenos_Aires">Argentina Standard Time (America/Buenos_Aires)</option>
+<option value="Asia/Yerevan">Armenian Standard Time (Asia/Yerevan)</option>
+<option value="America/Halifax">Atlantic Standard Time (America/Halifax)</option>
+<option value="Asia/Baku">Azerbaijan Standard Time (Asia/Baku)</option>
+<option value="Atlantic/Azores">Azores Standard Time (Atlantic/Azores)</option>
+<option value="America/Regina">Canada Central Standard Time (America/Regina)</option>
+<option value="Atlantic/Cape_Verde">Cape Verde Standard Time (Atlantic/Cape_Verde)</option>
+<option value="Australia/Adelaide">Cen. Australia Standard Time (Australia/Adelaide)</option>
+<option value="America/Guatemala">Central America Standard Time (America/Guatemala)</option>
+<option value="Asia/Dhaka">Central Asia Standard Time (Asia/Dhaka)</option>
+<option value="America/Manaus">Central Brazilian Standard Time (America/Manaus)</option>
+<option value="Europe/Budapest">Central Europe Standard Time (Europe/Budapest)</option>
+<option value="Europe/Warsaw">Central European Standard Time (Europe/Warsaw)</option>
+<option value="Pacific/Guadalcanal">Central Pacific Standard Time (Pacific/Guadalcanal)</option>
+<option value="America/Chicago">Central Standard Time (America/Chicago)</option>
+<option value="America/Mexico_City">Central Standard Time (Mexico) (America/Mexico_City)</option>
+<option value="Asia/Shanghai">China Standard Time (Asia/Shanghai)</option>
+<option value="Etc/GMT+12">Dateline Standard Time (Etc/GMT+12)</option>
+<option value="Africa/Nairobi">E. Africa Standard Time (Africa/Nairobi)</option>
+<option value="Australia/Brisbane">E. Australia Standard Time (Australia/Brisbane)</option>
+<option value="Europe/Minsk">E. Europe Standard Time (Europe/Minsk)</option>
+<option value="America/Sao_Paulo">E. South America Standard Time (America/Sao_Paulo)</option>
+<option value="America/New_York">Eastern Standard Time (America/New_York)</option>
+<option value="Africa/Cairo">Egypt Standard Time (Africa/Cairo)</option>
+<option value="Asia/Yekaterinburg">Ekaterinburg Standard Time (Asia/Yekaterinburg)</option>
+<option value="Europe/Kiev">FLE Standard Time (Europe/Kiev)</option>
+<option value="Pacific/Fiji">Fiji Standard Time (Pacific/Fiji)</option>
+<option value="Europe/London">GMT Standard Time (Europe/London)</option>
+<option value="Europe/Istanbul">GTB Standard Time (Europe/Istanbul)</option>
+<option value="Etc/GMT-3">Georgian Standard Time (Etc/GMT-3)</option>
+<option value="America/Godthab">Greenland Standard Time (America/Godthab)</option>
+<option value="Atlantic/Reykjavik">Greenwich Standard Time (Atlantic/Reykjavik)</option>
+<option value="Pacific/Honolulu">Hawaiian Standard Time (Pacific/Honolulu)</option>
+<option value="Asia/Calcutta">India Standard Time (Asia/Calcutta)</option>
+<option value="Asia/Tehran">Iran Standard Time (Asia/Tehran)</option>
+<option value="Asia/Jerusalem">Israel Standard Time (Asia/Jerusalem)</option>
+<option value="Asia/Amman">Jordan Standard Time (Asia/Amman)</option>
+<option value="Asia/Seoul">Korea Standard Time (Asia/Seoul)</option>
+<option value="Indian/Mauritius">Mauritius Standard Time (Indian/Mauritius)</option>
+<option value="America/Chihuahua">Mexico Standard Time 2 (America/Chihuahua)</option>
+<option value="Atlantic/South_Georgia">Mid-Atlantic Standard Time (Atlantic/South_Georgia)</option>
+<option value="Asia/Beirut">Middle East Standard Time (Asia/Beirut)</option>
+<option value="America/Montevideo">Montevideo Standard Time (America/Montevideo)</option>
+<option value="Africa/Casablanca">Morocco Standard Time (Africa/Casablanca)</option>
+<option value="America/Denver">Mountain Standard Time (America/Denver)</option>
+<option value="Asia/Rangoon">Myanmar Standard Time (Asia/Rangoon)</option>
+<option value="Asia/Novosibirsk">N. Central Asia Standard Time (Asia/Novosibirsk)</option>
+<option value="Africa/Windhoek">Namibia Standard Time (Africa/Windhoek)</option>
+<option value="Asia/Katmandu">Nepal Standard Time (Asia/Katmandu)</option>
+<option value="Pacific/Auckland">New Zealand Standard Time (Pacific/Auckland)</option>
+<option value="America/St_Johns">Newfoundland Standard Time (America/St_Johns)</option>
+<option value="Asia/Irkutsk">North Asia East Standard Time (Asia/Irkutsk)</option>
+<option value="Asia/Krasnoyarsk">North Asia Standard Time (Asia/Krasnoyarsk)</option>
+<option value="America/Santiago">Pacific SA Standard Time (America/Santiago)</option>
+<option value="America/Los_Angeles">Pacific Standard Time (America/Los_Angeles)</option>
+<option value="America/Tijuana">Pacific Standard Time (Mexico) (America/Tijuana)</option>
+<option value="Asia/Karachi">Pakistan Standard Time (Asia/Karachi)</option>
+<option value="Europe/Paris">Romance Standard Time (Europe/Paris)</option>
+<option value="Europe/Moscow">Russian Standard Time (Europe/Moscow)</option>
+<option value="Etc/GMT+3">SA Eastern Standard Time (Etc/GMT+3)</option>
+<option value="America/Bogota">SA Pacific Standard Time (America/Bogota)</option>
+<option value="America/La_Paz">SA Western Standard Time (America/La_Paz)</option>
+<option value="Asia/Bangkok">SE Asia Standard Time (Asia/Bangkok)</option>
+<option value="Pacific/Apia">Samoa Standard Time (Pacific/Apia)</option>
+<option value="Asia/Singapore">Singapore Standard Time (Asia/Singapore)</option>
+<option value="Africa/Johannesburg">South Africa Standard Time (Africa/Johannesburg)</option>
+<option value="Asia/Colombo">Sri Lanka Standard Time (Asia/Colombo)</option>
+<option value="Asia/Taipei">Taipei Standard Time (Asia/Taipei)</option>
+<option value="Australia/Hobart">Tasmania Standard Time (Australia/Hobart)</option>
+<option value="Asia/Tokyo">Tokyo Standard Time (Asia/Tokyo)</option>
+<option value="Pacific/Tongatapu">Tonga Standard Time (Pacific/Tongatapu)</option>
+<option value="Etc/GMT+5">US Eastern Standard Time (Etc/GMT+5)</option>
+<option value="America/Phoenix">US Mountain Standard Time (America/Phoenix)</option>
+<option value="America/Caracas">Venezuela Standard Time (America/Caracas)</option>
+<option value="Asia/Vladivostok">Vladivostok Standard Time (Asia/Vladivostok)</option>
+<option value="Australia/Perth">W. Australia Standard Time (Australia/Perth)</option>
+<option value="Africa/Lagos">W. Central Africa Standard Time (Africa/Lagos)</option>
+<option value="Europe/Berlin">W. Europe Standard Time (Europe/Berlin)</option>
+<option value="Asia/Tashkent">West Asia Standard Time (Asia/Tashkent)</option>
+<option value="Pacific/Port_Moresby">West Pacific Standard Time (Pacific/Port_Moresby)</option>
+<option value="Asia/Yakutsk">Yakutsk Standard Time (Asia/Yakutsk)</option>
+											</select>
+										</div>
+
+									</div>
+                                                                        <div class="control-group">
+										<label class="control-label">Locale</label>
+                                                                                    <div class="controls">
+											<select data-placeholder="Your Favorite Football Team" class="chosen span6" tabindex="-1" id="selLAF"  name="settings[general][locale]"> 
+<option value="af_ZA">Afrikaans (South Africa)</option>
+<option value="sq_AL">Albanian (Albania)</option>
+<option value="ar_DZ">Arabic (Algeria)</option>
+<option value="ar_EG">Arabic (Egypt)</option>
+<option value="ar_KW">Arabic (Kuwait)</option>
+<option value="ar_MA">Arabic (Morocco)</option>
+<option value="ar_SA">Arabic (Saudi Arabia)</option>
+<option value="az_AZ">Azerbaijani (Azerbaijan)</option>
+<option value="be_BY">Belarusian (Belarus)</option>
+<option value="bn_BD">Bengali (Bangladesh)</option>
+<option value="bs_BA">Bosnian (Bosnia and Herzegovina)</option>
+<option value="bg_BG">Bulgarian (Bulgaria)</option>
+<option value="ca_ES">Catalan (Spain)</option>
+<option value="zh_CN">Chinese (China)</option>
+<option value="zh_HK">Chinese (Hong Kong SAR China)</option>
+<option value="zh_TW">Chinese (Taiwan)</option>
+<option value="hr_HR">Croatian (Croatia)</option>
+<option value="cs_CZ">Czech (Czech Republic)</option>
+<option value="da_DK">Danish (Denmark)</option>
+<option value="nl_NL">Dutch (Netherlands)</option>
+<option value="en_AU">English (Australia)</option>
+<option value="en_CA">English (Canada)</option>
+<option value="en_IE">English (Ireland)</option>
+<option value="en_NZ">English (New Zealand)</option>
+<option value="en_GB">English (United Kingdom)</option>
+<option value="en_US">English (United States)</option>
+<option value="et_EE">Estonian (Estonia)</option>
+<option value="fil_PH">Filipino (Philippines)</option>
+<option value="fi_FI">Finnish (Finland)</option>
+<option value="fr_CA">French (Canada)</option>
+<option value="fr_FR">French (France)</option>
+<option value="gl_ES">Galician (Spain)</option>
+<option value="ka_GE">Georgian (Georgia)</option>
+<option value="de_AT">German (Austria)</option>
+<option value="de_DE">German (Germany)</option>
+<option value="de_CH">German (Switzerland)</option>
+<option value="el_GR">Greek (Greece)</option>
+<option value="gu_IN">Gujarati (India)</option>
+<option value="he_IL">Hebrew (Israel)</option>
+<option value="hi_IN">Hindi (India)</option>
+<option value="hu_HU">Hungarian (Hungary)</option>
+<option value="is_IS">Icelandic (Iceland)</option>
+<option value="id_ID">Indonesian (Indonesia)</option>
+<option value="it_IT">Italian (Italy)</option>
+<option value="it_CH">Italian (Switzerland)</option>
+<option value="ja_JP">Japanese (Japan)</option>
+<option value="km_KH">Khmer (Cambodia)</option>
+<option value="ko_KR">Korean (South Korea)</option>
+<option value="lo_LA">Lao (Laos)</option>
+<option value="lv_LV">Latvian (Latvia)</option>
+<option value="lt_LT">Lithuanian (Lithuania)</option>
+<option value="mk_MK">Macedonian (Macedonia)</option>
+<option value="ms_MY">Malay (Malaysia)</option>
+<option value="mn_MN">Mongolian (Mongolia)</option>
+<option value="nb_NO">Norwegian Bokmål (Norway)</option>
+<option value="nn_NO">Norwegian Nynorsk (Norway)</option>
+<option value="fa_IR">Persian (Iran)</option>
+<option value="pl_PL">Polish (Poland)</option>
+<option value="pt_BR">Portuguese (Brazil)</option>
+<option value="pt_PT">Portuguese (Portugal)</option>
+<option value="ro_RO">Romanian (Romania)</option>
+<option value="ru_RU">Russian (Russia)</option>
+<option value="sr_RS">Serbian (Serbia)</option>
+<option value="sk_SK">Slovak (Slovakia)</option>
+<option value="sl_SI">Slovenian (Slovenia)</option>
+<option value="es_AR">Spanish (Argentina)</option>
+<option value="es_CL">Spanish (Chile)</option>
+<option value="es_CO">Spanish (Colombia)</option>
+<option value="es_CR">Spanish (Costa Rica)</option>
+<option value="es_MX">Spanish (Mexico)</option>
+<option value="es_PA">Spanish (Panama)</option>
+<option value="es_PE">Spanish (Peru)</option>
+<option value="es_ES">Spanish (Spain)</option>
+<option value="es_VE">Spanish (Venezuela)</option>
+<option value="sw_KE">Swahili (Kenya)</option>
+<option value="sv_SE">Swedish (Sweden)</option>
+<option value="th_TH">Thai (Thailand)</option>
+<option value="tr_TR">Turkish (Turkey)</option>
+<option value="uk_UA">Ukrainian (Ukraine)</option>
+<option value="vi_VN">Vietnamese (Vietnam)</option>
+<option value="cy_GB">Welsh (United Kingdom)</option> 
+</select> 	 
+										</div>
+
+									</div>
+
+									<div class="control-group">
+										<label class="control-label">Working Days</label>
+																				<div class="controls">
+											<select data-placeholder="Working days" class="chosen span6" multiple="multiple" tabindex="6"    name="settings[general][working_days]">
+												<option value=""></option>
+												<?php foreach($workingdays as $key => $days):?>
+												<option value="<?php echo $key;?>"><?php echo $days;?></option>
+												<?php endforeach;?> 
+											</select>
+										</div>
+
+									</div>
+									 
+									
+								</form>
+								<!-- END FORM-->       
+							</div>
+						</div>
+
+					</div>
+				</div>
+                                    
+                                <!--3-->
+                                    <div class="row-fluid">
+					<div class="span12"> 
+						<div class="portlet box red">
+							<div class="portlet-title">
+								<div class="caption"><i class="icon-reorder"></i>Site Information</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"></a>
+									<a href="#portlet-config" data-toggle="modal" class="config"></a>
+									<a href="javascript:;" class="reload"></a>
+									<a href="javascript:;" class="remove"></a>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<!-- BEGIN FORM-->
+								<form action="#" class="form-horizontal">
+									<div class="control-group">
+										<label class="control-label">Sitename</label>
+                                                                                    <div class="controls">
+											<input type="text" id="sitename" name="settings[general][sitename]" class="m-wrap span12" placeholder="Site Name">
+										</div> 
+									</div>
+                                                                        <div class="control-group">
+										<label class="control-label">Telephone</label>
+                                                                                    <div class="controls">
+											<input type="text" id="telephone" name="settings[general][telephone]" class="m-wrap span12" placeholder="Telephone">
+										</div> 
+									</div>
+                                                                        <div class="control-group">
+										<label class="control-label">Country</label>
+                                                                                    <div class="controls">
+											<select data-placeholder="Choose country" class="chosen span6" tabindex="-1" id="selK2I" name="settings[general][site_country]">
+												<option value=""></option>
+												<?php foreach($countries as $country):?>
+                                                                                                <option value="<?php echo $country['code'];?>"><?php echo $country['default_name'];?></option>
+												<?php endforeach;?> 
+											</select>
+										</div>
+
+									</div> 
+									 <div class="control-group">
+										<label class="control-label">Textarea</label>
+										<div class="controls">
+											<textarea name="settings[general][site_address]" class="span6 m-wrap" rows="3"></textarea>
+										</div>
+									</div>
+									
+								</form>
+								<!-- END FORM-->       
+							</div>
+						</div>
+
+					</div>
+				</div>
+                                
+				<!-- END PAGE CONTENT-->         
+			</div>
+			<!-- END PAGE CONTAINER-->
+                </div>
+        </div>
+</div>
+  <?php  $this->headScript()
+            ->appendFile($this->basePath().  '/plugins/jquery-multi-select/js/jquery.multi-select.js')
+            ->appendFile($this->basePath().  '/plugins/chosen-bootstrap/chosen/chosen.jquery.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
+            ->appendFile($this->basePath().  '/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js')
+            ->appendFile($this->basePath().  '/plugins/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js')
+            ->appendFile($this->basePath() . '/js/admin/app.js') 
+            ->appendFile($this->basePath() . '/js/admin/form-components.js')
+            ->appendFile($this->basePath().  '/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
+            ->appendFile($this->basePath().  '/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')
+            ->appendFile($this->basePath().  '/plugins/jquery.input-ip-address-control-1.0.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js');
+        ?>
+        <script>
+		jQuery(document).ready(function() {    
+		   App.init(); // initlayout and core plugins
+		    FormComponents.init();
+
+		});
+	</script>

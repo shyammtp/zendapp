@@ -1,8 +1,10 @@
 <?php
 namespace Admin;
  
-use Admin\Model\AdminTable;
+use Admin\Model\AdminTable; 
 use Admin\Model\Login;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway; 
 
@@ -50,6 +52,29 @@ class Module
                     $admin->setDbAdapter($dbAdapter);
                     return $admin;
                 },
+                'Admin\Model\Login\AuthStorage' => function($sm){
+                    return new \Admin\Model\Login\AuthStorage('adminOauth');
+                },
+                'AuthService' => function($sm) {
+                    $dbAdapter           = $sm->get('Zend\Db\Adapter\Adapter');
+                    $dbTableAuthAdapter  = new DbTableAuthAdapter($dbAdapter, 
+                                              'admin_user','username','password', 'MD5(?)');
+             
+                    $authService = new AuthenticationService();
+                    $authService->setAdapter($dbTableAuthAdapter);
+                    $authService->setStorage($sm->get('Admin\Model\Login\AuthStorage'));
+                    return $authService;
+                },
+                
+            ),
+        );
+    }
+    
+    public function getViewHelperConfig()
+    {
+        return array(
+            'invokables' => array(
+                'formelementerrors' => 'Admin\Form\View\Helper\FormElementErrors'
             ),
         );
     }

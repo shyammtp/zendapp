@@ -37,14 +37,8 @@
             ->prependFile($this->basePath() . '/plugins/jquery-1.10.1.min.js'); ?>
 
     </head>
-    <body>
-        <?php // <-- Update this !!
-$this->navigation('navigation')
-    ->breadcrumbs()->setMinDepth(0);?>
-        <?php echo $this->partial('layout/header');?> 
-        <?php echo $this->partial('layout/sidemenu');?>
-        <?php echo $this->content; ?> 
-        <?php echo $this->partial('layout/footer');?> 
+    <body> 
+        <?php echo $this->content; ?>  
         <?php echo $this->inlineScript() ?>
     </body>
 </html>
