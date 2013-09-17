@@ -749,6 +749,13 @@ var App = function () {
             }
         });
     }
+    
+    var global_formsubmit = function()
+    { 
+        $('button[type="submit"]').live('click',function(){ 
+           $('form').submit(); 
+        });
+    }
 
     //* END:CORE HANDLERS *//
 
@@ -787,6 +794,7 @@ var App = function () {
             handleChoosenSelect(); // handles bootstrap chosen dropdowns     
 
             App.addResponsiveHandler(handleChoosenSelect); // reinitiate chosen dropdown on main content resize. disable this line if you don't really use chosen dropdowns.
+            global_formsubmit();
         },
 
         fixContentHeight: function () {

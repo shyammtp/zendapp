@@ -25,7 +25,7 @@ if(!file_exists($siteCore))
 
 require $siteCore;
 
-Site::run();
+Ething::run();
 
 
 
