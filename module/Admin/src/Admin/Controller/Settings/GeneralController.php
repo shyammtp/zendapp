@@ -10,20 +10,23 @@
 namespace Admin\Controller\Settings;
   
 use Zend\View\Model\ViewModel;
-use Core\Controller\AbstractController as CoreController;  
+use Core\Controller\AbstractController as CoreController;
+use Admin\Form\Settings\General\Form as Generalform;
 
 class GeneralController extends CoreController
 {
     private $workingDays = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
     public function indexAction()
     { 
-        $countrys = $this->getCountryTable()->fetchAll();
+        $countrys = $this->getCountryTable()->fetchAll(); 
+        $configuration = $this->configurationTable()->fetchAll();
         $bind = array('countrys' => $countrys,
                     'workingdays' => $this->workingDays,
-                    'locale' => \Site::getLocale(),
-                    'timezone' => \Site::getTimezones());
-        $view = new ViewModel($bind);
-         
+                    'configuration' => $configuration,
+                    'locale' => \Ething::getLocale(),
+                    'timezone' => \Ething::getTimezones(),
+                    'successmessage' => $this->flashMessenger()->getSuccessMessages());
+        $view = new ViewModel($bind); 
         $view->setTemplate('admin/settings/general/index');
         return $view;
     }
@@ -34,6 +37,19 @@ class GeneralController extends CoreController
         return $view;
     }
      
-     
+    public function saveAction()
+    {
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            try
+            {
+                $this->configurationTable()->setData($request->getPost())->save();
+                $this->flashMessenger()->addSuccessMessage('Saved successfully');
+                
+            }catch(\Exception $e)
+            { }
+        }
+        return $this->redirect()->toRoute('general');
+    }
     
 }

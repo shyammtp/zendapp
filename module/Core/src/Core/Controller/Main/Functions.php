@@ -10,7 +10,8 @@ class Functions extends AbstractActionController
     protected $_sql; 
     
     protected function _getDBAdapter()
-    { 
+    {
+        
         return $this->getServiceLocator()->get('Zend_Db_Adapter');
     }
     

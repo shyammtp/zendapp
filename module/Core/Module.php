@@ -2,7 +2,8 @@
 namespace Core;
 
 use Core\Model\Functions;
-use Core\Model\Country as CountryRegion;
+use Core\Model\Country as CountryRegion;    
+use Core\Model\Configuration;
 use Zend\Db\TableGateway\TableGateway; 
 class Module
 { 
@@ -43,7 +44,14 @@ class Module
                 'countryGateway' => function($sm){
                     $dbAdapter = $sm->get('Zend_Db_Adapter'); 
                     return new TableGateway('country_region', $dbAdapter);
-                }, 
+                },
+                'Core\Model\Configuration' => function($sm)
+                {
+                    $dbAdapter = $sm->get('Zend_Db_Adapter'); 
+                    $tableGateway = new TableGateway('configuration_set', $dbAdapter);
+                    $table = new Configuration($tableGateway); 
+                    return $table;
+                }
             ),
         );
     }

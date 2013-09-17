@@ -9,6 +9,12 @@
  ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
  ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css');?>
  <?php
+ //echo \Ething::getSiteConfig('settings/general/default_country'); exit;
+ $configs = array();
+ foreach($configuration as $config)
+ {
+  $configs[$config->path] =  $config->value; 
+ } 
  $countries = array();
  foreach($countrys as $country):?>
  <?php $countries[] = array('code' => $country->code,'default_name' => $country->default_name); ?> 
@@ -61,28 +67,28 @@
 						 </div>
 				</div>
 				<!-- BEGIN PAGE CONTENT-->
-				<div class="row-fluid">
+				<form name="general_settings" action="<?php echo $this->basePath('admin/settings/general/save');?>" method="post" class="form-horizontal">
+ 				<div class="row-fluid">
 					<div class="span12"> 
 						<div class="portlet box blue">
 							<div class="portlet-title">
 								<div class="caption"><i class="icon-reorder"></i>Country options</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
-									<a href="javascript:;" class="reload"></a>
-									<a href="javascript:;" class="remove"></a>
 								</div>
 							</div>
 							<div class="portlet-body form">
 								<!-- BEGIN FORM-->
-								<form action="#" class="form-horizontal">
+								 
 									<div class="control-group">
 										<label class="control-label">Default country</label>
 																				<div class="controls">
 											<select data-placeholder="Your Default Country" class="chosen span6" tabindex="-1" id="selS0V" name="settings[general][default_country]">
 												<option value=""></option>
-												<?php foreach($countries as $country):?>
-                                                                                                <option value="<?php echo $country['code'];?>"><?php echo $country['default_name'];?></option>
+												<?php foreach($countries as $country):
+												$selected = ($configs['settings/general/default_country']==$country['code'])? "selected":"";
+												?>
+                                                                                                <option value="<?php echo $country['code'];?>" <?php echo $selected;?>><?php echo $country['default_name'];?></option>
 												<?php endforeach;?> 
 											</select>
 										</div>
@@ -91,10 +97,12 @@
 									<div class="control-group">
 										<label class="control-label">Allowed countries</label>
 																				<div class="controls">
-											<select data-placeholder="Choose country" class="chosen span6" multiple="multiple" tabindex="6" name="settings[general][allowed_country]">
+											<select data-placeholder="Choose country" class="chosen span6" multiple="multiple" tabindex="6" name="settings[general][allowed_country][]">
 												<option value=""></option>
-												<?php foreach($countries as $country):?>
-                                                                                                <option value="<?php echo $country['code'];?>"><?php echo $country['default_name'];?></option>
+												<?php foreach($countries as $country):
+												$selected = ($configs['settings/general/allowed_country']==$country['code'])? "selected":"";
+												?>
+                                                                                                <option value="<?php echo $country['code'];?>" <?php echo $selected;?>><?php echo $country['default_name'];?></option>
 												<?php endforeach;?> 
 											</select>
 										</div>
@@ -102,7 +110,7 @@
 									</div>
 									 
 									
-								</form>
+								 
 								<!-- END FORM-->       
 							</div>
 						</div>
@@ -118,21 +126,19 @@
 								<div class="caption"><i class="icon-reorder"></i>Locale options</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
-									<a href="javascript:;" class="reload"></a>
-									<a href="javascript:;" class="remove"></a>
 								</div>
 							</div>
 							<div class="portlet-body form">
-								<!-- BEGIN FORM-->
-								<form action="#" class="form-horizontal">
+								<!-- BEGIN FORM--> 
 									<div class="control-group">
 										<label class="control-label">TimeZone</label>
                                                                                     <div class="controls">
 											<select data-placeholder="Your Favorite Football Team" class="chosen span6" tabindex="-1" id="selS1F" name="settings[general][timezone]">
 												<option value=""></option>
-										<?php foreach($timezone as $value => $zone):?>
-											 <option value="<?php echo $value;?>"><?php echo $zone;?></option>
+										<?php foreach($timezone as $value => $zone):
+										$selected = ($configs['settings/general/timezone']==$value)? "selected":"";
+										?>
+											 <option value="<?php echo $value;?>" <?php echo $selected;?>><?php echo $zone;?></option>
 											 <?php endforeach;?>
 											</select>
 										</div>
@@ -142,8 +148,10 @@
 										<label class="control-label">Locale</label>
                                                                                     <div class="controls">
 											<select data-placeholder="Your Favorite Football Team" class="chosen span6" tabindex="-1" id="selLAF"  name="settings[general][locale]">
-											 <?php foreach($locale as $value => $local):?>
-											 <option value="<?php echo $value;?>"><?php echo $local;?></option>
+											 <?php foreach($locale as $value => $local):
+											 $selected = ($configs['settings/general/locale']==$value)? "selected":"";
+											 ?>
+											 <option value="<?php echo $value;?>" <?php echo $selected;?>><?php echo $local;?></option>
 											 <?php endforeach;?>
 </select> 	 
 										</div>
@@ -155,16 +163,17 @@
 																				<div class="controls">
 											<select data-placeholder="Working days" class="chosen span6" multiple="multiple" tabindex="6"    name="settings[general][working_days]">
 												<option value=""></option>
-												<?php foreach($workingdays as $key => $days):?>
-												<option value="<?php echo $key;?>"><?php echo $days;?></option>
+												<?php foreach($workingdays as $key => $days):
+												$selected = ($configs['settings/general/working_days']==$key)? "selected":"";
+												?>
+												<option value="<?php echo $key;?>" <?php echo $selected;?>><?php echo $days;?></option>
 												<?php endforeach;?> 
 											</select>
 										</div>
 
 									</div>
 									 
-									
-								</form>
+									 
 								<!-- END FORM-->       
 							</div>
 						</div>
@@ -180,24 +189,21 @@
 								<div class="caption"><i class="icon-reorder"></i>Site Information</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
-									<a href="javascript:;" class="reload"></a>
-									<a href="javascript:;" class="remove"></a>
 								</div>
 							</div>
 							<div class="portlet-body form">
 								<!-- BEGIN FORM-->
-								<form action="#" class="form-horizontal">
+								 
 									<div class="control-group">
 										<label class="control-label">Sitename</label>
                                                                                     <div class="controls">
-											<input type="text" id="sitename" name="settings[general][sitename]" class="m-wrap span12" placeholder="Site Name">
+											<input type="text" id="sitename" name="settings[general][sitename]" class="m-wrap span12" placeholder="Site Name" value="<?php echo $configs['settings/general/sitename'];?>">
 										</div> 
 									</div>
                                                                         <div class="control-group">
 										<label class="control-label">Telephone</label>
                                                                                     <div class="controls">
-											<input type="text" id="telephone" name="settings[general][telephone]" class="m-wrap span12" placeholder="Telephone">
+											<input type="text" id="telephone" name="settings[general][telephone]" class="m-wrap span12" placeholder="Telephone" value="<?php echo $configs['settings/general/telephone'];?>">
 										</div> 
 									</div>
                                                                         <div class="control-group">
@@ -205,8 +211,10 @@
                                                                                     <div class="controls">
 											<select data-placeholder="Choose country" class="chosen span6" tabindex="-1" id="selK2I" name="settings[general][site_country]">
 												<option value=""></option>
-												<?php foreach($countries as $country):?>
-                                                                                                <option value="<?php echo $country['code'];?>"><?php echo $country['default_name'];?></option>
+												<?php foreach($countries as $country):
+												$selected = ($configs['settings/general/allowed_country']==$country['code'])? "selected":"";
+												?>
+                                                                                                <option value="<?php echo $country['code'];?>" <?php echo $selected;?>><?php echo $country['default_name'];?></option>
 												<?php endforeach;?> 
 											</select>
 										</div>
@@ -215,18 +223,18 @@
 									 <div class="control-group">
 										<label class="control-label">Textarea</label>
 										<div class="controls">
-											<textarea name="settings[general][site_address]" class="span6 m-wrap" rows="3"></textarea>
+											<textarea name="settings[general][site_address]" class="span6 m-wrap" rows="3"><?php echo $configs['settings/general/site_address'];?></textarea>
 										</div>
 									</div>
 									
-								</form>
+							 
 								<!-- END FORM-->       
 							</div>
 						</div>
 
 					</div>
 				</div>
-                                
+				</form>
 				<!-- END PAGE CONTENT-->         
 			</div>
 			<!-- END PAGE CONTAINER-->
