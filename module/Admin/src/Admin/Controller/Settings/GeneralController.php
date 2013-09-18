@@ -15,12 +15,31 @@ use Admin\Form\Settings\General\Form as Generalform;
 
 class GeneralController extends CoreController
 {
+    
     private $workingDays = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+    
+    private $_generalForm;
+    
+    private function getGeneralFormObject()
+    {
+        if(!$this->_generalForm)
+        {
+            $this->_generalForm = \Ething::getClassInstance('Admin\Form\Settings\General\Form');
+        }
+        return $this->_generalForm;
+    }
+    
     public function indexAction()
     { 
-        $countrys = $this->getCountryTable()->fetchAll(); 
+        $countrys = $this->getCountryTable()->fetchAll();
+        $form = $this->getGeneralFormObject();
+        $form->get('settings[general][default_country]')
+            ->setValueOptions($this->getCountryTable()
+                              ->toOptionArray());
+            //$this->getGeneralFormObject()->bind($album);
         $configuration = $this->configurationTable()->fetchAll();
-        $bind = array('countrys' => $countrys,
+        $bind = array('form' => $form,
+                      'countrys' => $countrys,
                     'workingdays' => $this->workingDays,
                     'configuration' => $configuration,
                     'locale' => \Ething::getLocale(),
@@ -40,6 +59,7 @@ class GeneralController extends CoreController
     public function saveAction()
     {
         $request = $this->getRequest();
+        $this->getGeneralFormObject()->setData($request->getPost());
         if ($request->isPost()) {
             try
             {
@@ -49,7 +69,7 @@ class GeneralController extends CoreController
             }catch(\Exception $e)
             { }
         }
-        return $this->redirect()->toRoute('general');
+        return $this->redirect()->toRoute('admin',array('action' => 'settings','id'=> 'general'));
     }
     
 }

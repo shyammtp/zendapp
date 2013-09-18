@@ -1,15 +1,11 @@
 <?php
  $this->headLink()->appendStylesheet($this->basePath().'/plugins/select2/select2_metro.css')
  ->appendStylesheet($this->basePath().'/plugins/chosen-bootstrap/chosen/chosen.css')
- ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
- ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
- ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
- ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
- ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
- ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css')
  ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css');?>
  <?php
  //echo \Ething::getSiteConfig('settings/general/default_country'); exit;
+ $form->prepare();
+ 
  $configs = array();
  foreach($configuration as $config)
  {
@@ -83,14 +79,7 @@
 									<div class="control-group">
 										<label class="control-label">Default country</label>
 																				<div class="controls">
-											<select data-placeholder="Your Default Country" class="chosen span6" tabindex="-1" id="selS0V" name="settings[general][default_country]">
-												<option value=""></option>
-												<?php foreach($countries as $country):
-												$selected = ($configs['settings/general/default_country']==$country['code'])? "selected":"";
-												?>
-                                                                                                <option value="<?php echo $country['code'];?>" <?php echo $selected;?>><?php echo $country['default_name'];?></option>
-												<?php endforeach;?> 
-											</select>
+											<?php echo $this->formElement($form->get('settings[general][default_country]'));?>
 										</div>
 
 									</div>
@@ -240,7 +229,7 @@
 			<!-- END PAGE CONTAINER-->
                 </div>
         </div>
-</div>
+</div> 
   <?php  $this->headScript()
             ->appendFile($this->basePath().  '/plugins/jquery-multi-select/js/jquery.multi-select.js')
             ->appendFile($this->basePath().  '/plugins/chosen-bootstrap/chosen/chosen.jquery.min.js')
@@ -252,13 +241,6 @@
             ->appendFile($this->basePath().  '/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
             ->appendFile($this->basePath().  '/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')
             ->appendFile($this->basePath().  '/plugins/jquery.input-ip-address-control-1.0.min.js')
-            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
-            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
-            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
-            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
-            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
-            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
-            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
             ->appendFile($this->basePath().  '/plugins/select2/select2.min.js');
         ?>
         <script>

@@ -24,6 +24,24 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+                'may_terminate' => true,
+                 'child_routes' => array(
+                    'settings' => array(
+                        'type'    => 'Segment',
+                        'may_terminate' => true,
+                        'options' => array(
+                            'route'    => '/general[/][:action][/][:id]',
+                            'constraints' => array(
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'     => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Admin\Controller\Settings\General',
+                                'action'     => 'index',
+                            ),
+                        ),
+                    ),
+                ),
             ),
             'dashboard' => array(
                 'type'    => 'segment',
@@ -39,7 +57,7 @@ return array(
                     ),
                 ),
             ),
-            'general' => array(
+            /*'general' => array(
                 'type'    => 'segment',
                 'options' => array(
                     'route'    => '/admin/settings/general[/][:action][/][/:id]',
@@ -52,7 +70,7 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-            ),
+            ),*/
         ),
     ),
     'view_manager' => array(

@@ -15,8 +15,18 @@ class Country
 
     public function fetchAll()
     {
-        $resultSet = $this->tableGateway->select();
+        $resultSet = $this->tableGateway->select()->buffer();
         return $resultSet;
-    } 
+    }
+    
+    public function toOptionArray()
+    {
+        $countrys = $this->tableGateway->select()->buffer(); 
+        $countries = array();
+        foreach($countrys as $country){
+               $countries[$country->code] = $country->default_name;
+        }
+        return $countries;
+    }
  
 }
