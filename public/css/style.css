@@ -5307,3 +5307,5 @@ Datatables Plugin(in v1.3)
 .dataTable .details tr:nth-child(even) th {
   background-color: #eee !important;
 }
+
+.form-actions .fixed-title{float:left;font-weight: bold;font-size: 14px;padding-top: 10px;}
