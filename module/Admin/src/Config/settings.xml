@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <admin_settings_general>
+        <groups>
+            <country_options>
+                <label>Country Options</label> 
+                <fields>
+                    <default_country>
+                        <name>settings[general][default_country]</name>
+                        <path>settings/general/default_country</path>
+                        <label>Default Country</label>
+                        <type>select</type>
+                        <attributes>
+                            <data-placeholder>Choose country</data-placeholder><class>chosen span6</class>  
+                        </attributes> 
+                        <options>
+                            <label>Choose country</label>
+                           <sourcemodel>Core\Model\System\Config\Source\Country</sourcemodel>
+                           <sourcemodel_method>toOptionArray</sourcemodel_method>
+                        </options>
+                        <comment><![CDATA[test]]></comment>
+                    </default_country>
+                    <allowed_country>
+                        <name>settings[general][allowed_country][]</name>
+                        <path>settings/general/allowed_country</path>
+                        <label>Allowed countries</label>
+                        <type>select</type>
+                        <attributes>
+                            <data-placeholder>Choose country</data-placeholder>
+                            <class>chosen span6</class>
+                            <multiple>multiple</multiple>
+                        </attributes> 
+                        <options>
+                            <label>Choose country</label>
+                           <sourcemodel>Core\Model\System\Config\Source\Country</sourcemodel>
+                        </options>
+                    </allowed_country>
+                </fields>
+            </country_options>
+            <locale_options>
+                <class>green</class>
+                <label>Locale Options</label>
+                <fields>
+                    <timezone>
+                        <name>settings[general][timezone]</name>
+                        <path>settings/general/timezone</path>
+                        <label>TimeZone</label>
+                        <type>select</type>
+                        <attributes>
+                            <data-placeholder>Your Time Zone</data-placeholder>
+                            <class>chosen span6</class> <id>selLAF</id>
+                        </attributes> 
+                        <options>
+                            <label>Your Time Zone</label>
+                           <sourcemodel>Ething</sourcemodel>
+                           <sourcemodel_method>getLocale</sourcemodel_method>
+                        </options>
+                    </timezone>
+                    <locale>
+                        <name>settings[general][locale]</name>
+                        <path>settings/general/locale</path>
+                        <label>Locale</label>
+                        <type>select</type>
+                        <attributes>
+                            <data-placeholder>Your Locale</data-placeholder>
+                            <class>chosen span6</class> <id>selsLAF</id>
+                        </attributes> 
+                        <options>
+                            <label>Your Locale</label>
+                           <sourcemodel>Ething</sourcemodel>
+                           <sourcemodel_method>getTimezones</sourcemodel_method>
+                        </options>
+                    </locale>
+                    <working_days>
+                        <name>settings[general][working_days][]</name>
+                        <path>settings/general/working_days</path>
+                        <label>Working Days</label>
+                        <type>select</type>
+                        <attributes>
+                            <data-placeholder>Working Days</data-placeholder>
+                            <class>chosen span6</class> <multiple>multiple</multiple>
+                        </attributes> 
+                        <options>
+                            <label>Working Days</label>
+                            <values>
+                                <sunday value="0" label="Sunday" />
+                                <monday value="1" label="Monday" />
+                                <tuesday value="2" label="Tuesday" />
+                                <wednesday value="3" label="Wednesday" />
+                                <thursday value="4" label="Thursday" />
+                                <friday value="5" label="Friday" />
+                                <saturday value="6" label="Saturday" />
+                            </values>
+                        </options>
+                    </working_days>
+                </fields>
+            </locale_options>
+            <site_info>
+                <class>red</class>
+                <label>Site Information</label>
+                <fields>
+                    <sitename>
+                        <name>settings[general][sitename]</name>
+                        <path>settings/general/sitename</path>
+                        <label>Sitename</label>
+                        <type>text</type>
+                        <attributes>
+                            <placeholder>Site Name</placeholder>
+                            <class>m-wrap span12</class> 
+                        </attributes> 
+                    </sitename> 
+                     <telephone>
+                        <name>settings[general][telephone]</name>
+                        <path>settings/general/telephone</path>
+                        <label>Telephone</label>
+                        <type>text</type>
+                        <attributes>
+                            <placeholder>Telephone</placeholder>
+                            <class>m-wrap span12</class> 
+                        </attributes> 
+                    </telephone>
+                     <site_country>
+                        <name>settings[general][site_country]</name>
+                        <path>settings/general/site_country</path>
+                        <label>Default Country</label>
+                        <type>select</type>
+                        <attributes>
+                            <data-placeholder>Choose country</data-placeholder><class>chosen span6</class> 
+                        </attributes> 
+                        <options>
+                            <label>Choose country</label>
+                           <sourcemodel>Core\Model\System\Config\Source\Country</sourcemodel>
+                           <sourcemodel_method>toOptionArray</sourcemodel_method>
+                        </options>
+                    </site_country>
+                     <site_address>
+                        <name>settings[general][site_address]</name>
+                        <path>settings/general/site_address</path>
+                        <label>Textarea</label>
+                        <type>textarea</type>
+                        <attributes>
+                            <class>span6 m-wrap</class> 
+                        </attributes>  
+                    </site_address>
+                </fields>
+            </site_info>
+        </groups>
+    </admin_settings_general>
+    <admin_settings_general_web>
+         <groups>
+            <url_info>
+                <label>URL Information</label>
+                <fields>
+                    <base_url>
+                        <name>settings[general][web][base_url]</name>
+                        <path>settings/general/web/base_url</path>
+                        <label>Base Url</label>
+                        <type>text</type>
+                        <attributes>
+                            <placeholder>Base URL</placeholder>
+                            <class>m-wrap span12</class> 
+                        </attributes>
+                        <comment_block>Make sure that base URL ends with '/' (slash), e.g. http://yourdomain/magento/</comment_block>
+                    </base_url>
+                </fields>
+            </url_info>
+         </groups>
+    </admin_settings_general_web>
+</config>

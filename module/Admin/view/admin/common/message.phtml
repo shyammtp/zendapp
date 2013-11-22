@@ -1,0 +1,17 @@
+ 
+	    <?php   if(isset($flashSuccessMessages)) :?>
+        <?php foreach ($flashSuccessMessages as $flashMessage) : ?>
+            <div class="alert alert-success">
+                    <button class="close" data-dismiss="alert"></button>
+                    <strong>Success!</strong> <?php echo $flashMessage; ?>
+            </div>
+            <?php endforeach; ?> 
+        <?php endif; ?>
+        <?php   if(isset($flashErrorMessages)) :?>
+            <?php foreach ($flashErrorMessages as $flashMessage) : ?>
+            <div class="alert alert-error">
+                    <button class="close" data-dismiss="alert"></button>
+                    <strong>Error!</strong> <?php echo $flashMessage; ?>
+            </div>
+            <?php endforeach; ?> 
+        <?php endif; ?>

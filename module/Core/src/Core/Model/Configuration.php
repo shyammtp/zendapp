@@ -19,7 +19,7 @@ class Configuration
     
     public function setData($post)
     { 
-        $this->fetchEntityPath($post,$this->_configuration); 
+        $this->fetchEntityPath($post); 
         return $this;
     }
     
@@ -27,7 +27,7 @@ class Configuration
     {
        $select = $this->tableGateway->select(array('path' => $path));
        $result = $select->current();
-       return $result->value;
+       return ($result)? $result->value:"";
     }
     
     
@@ -60,7 +60,7 @@ class Configuration
     }
     
     public function save()
-    {
+    {  
         if(is_array($this->getConfigDatas()))
         {
             foreach($this->getConfigDatas() as $config)
@@ -79,25 +79,50 @@ class Configuration
     }
      
     
-    private function fetchEntityPath($someArray, &$outputArray, $separator = "/")
+    private function fetchEntityPath($someArray, $separator = "/")
     {
         $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($someArray), \RecursiveIteratorIterator::SELF_FIRST);
+        $conditionalArray = array();
         foreach ($iterator as $k => $v) {
-        
+       
             if (!$iterator->hasChildren()) {
-                for ($p = array(),$v = array(), $i = 0, $z = $iterator->getDepth(); $i <= $z; $i++) {
-                    if(!is_numeric( $iterator->getSubIterator($i)->key()))
-                    {
-                        $p[] = $iterator->getSubIterator($i)->key(); 
-                    }
-                } 
-                $path = implode($separator, $p);
                  
-                $value = is_array($iterator->current())?implode(",",$iterator->current()):$iterator->current();
-                $outputArray[] = array('path' => $path,'value' => $value);
+                 for ($p = array(),$v = array(), $i = 0, $z = $iterator->getDepth(); $i <= $z; $i++) {
+                        if(!is_numeric( $iterator->getSubIterator($i)->key()))
+                        {
+                            $p[] = $iterator->getSubIterator($i)->key(); 
+                        }
+                    } 
+                    $path = implode($separator, $p);
+                     
+                if(is_numeric($k))
+                {
+                    $value = is_array($iterator->current())?implode(",",$iterator->current()):$iterator->current();
+                    $conditionalArray[$path][] =  $value;
+                }else{
+                    
+                     
+                    $value = is_array($iterator->current())?implode(",",$iterator->current()):$iterator->current();
+                    $outputArray[$path] = $value;
+                }
             }
+             
         }
+        
+        $proceduralArray = array();
+        foreach($conditionalArray as $key => $array)
+        {
+            $proceduralArray[$key] = implode(",",$array);
+        }
+        $final = array_merge($outputArray,$proceduralArray);
+        foreach($final as $path => $value)
+        {
+            $this->_configuration[] = array('path' => $path, 'value'=> $value);
+        } 
+        return $this->_configuration;
     }
+    
+    
     
     public function getConfigDatas()
     {

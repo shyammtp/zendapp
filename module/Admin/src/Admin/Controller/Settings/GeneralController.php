@@ -30,35 +30,20 @@ class GeneralController extends CoreController
     }
     
     public function indexAction()
-    { 
-        $countrys = $this->getCountryTable()->fetchAll();
-        $form = $this->getGeneralFormObject();
-        $form->get('settings[general][default_country]')
-            ->setValueOptions($this->getCountryTable()
-                              ->toOptionArray());
-            //$this->getGeneralFormObject()->bind($album);
-        $configuration = $this->configurationTable()->fetchAll();
-        $bind = array('form' => $form,
-                      'countrys' => $countrys,
-                    'workingdays' => $this->workingDays,
-                    'configuration' => $configuration,
-                    'locale' => \Ething::getLocale(),
-                    'timezone' => \Ething::getTimezones(),
-                    'successmessage' => $this->flashMessenger()->getSuccessMessages());
-        $view = new ViewModel($bind); 
-        $view->setTemplate('admin/settings/general/index');
-        return $view;
+    {
+        
+        return $this->loadSettingsForm('admin_settings_general');  
     }
     
     public function webAction()
     { 
-        $view = new ViewModel();
-        return $view;
+        return $this->loadSettingsForm('admin_settings_general_web');
     }
      
     public function saveAction()
     {
         $request = $this->getRequest();
+        
         $this->getGeneralFormObject()->setData($request->getPost());
         if ($request->isPost()) {
             try
@@ -69,7 +54,7 @@ class GeneralController extends CoreController
             }catch(\Exception $e)
             { }
         }
-        return $this->redirect()->toRoute('admin',array('action' => 'settings','id'=> 'general'));
+        return $this->redirect()->toRoute('settings',array('action' => $request->getPost('current_action') ));
     }
     
 }

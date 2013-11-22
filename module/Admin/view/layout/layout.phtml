@@ -40,9 +40,12 @@
     <body>
         <?php // <-- Update this !!
 $this->navigation('navigation')
-    ->breadcrumbs()->setMinDepth(0);?>
+    ->breadcrumbs()->setMinDepth(0);  ?>
+    
         <?php echo $this->partial('layout/header');?> 
         <?php echo $this->partial('layout/sidemenu');?>
+        
+        <?php echo $this->partial('layout/message');?>
         <?php echo $this->content; ?> 
         <?php echo $this->partial('layout/footer');?> 
         <?php echo $this->inlineScript() ?>

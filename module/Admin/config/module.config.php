@@ -8,6 +8,8 @@ return array(
             'Admin\Controller\Settings\General' => 'Admin\Controller\Settings\GeneralController', 
         ),
     ),
+    
+    
     // The following section is new and should be added to your file
     'router' => array(
         'routes' => array(
@@ -27,7 +29,7 @@ return array(
                 'may_terminate' => true,
                  'child_routes' => array(
                     'settings' => array(
-                        'type'    => 'Segment',
+                        'type'    => 'segment',
                         'may_terminate' => true,
                         'options' => array(
                             'route'    => '/general[/][:action][/][:id]',
@@ -38,8 +40,23 @@ return array(
                             'defaults' => array(
                                 'controller' => 'Admin\Controller\Settings\General',
                                 'action'     => 'index',
+                                'id' => null
                             ),
                         ),
+                    ),
+                ),
+            ),
+            'settings' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/admin/settings/general[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Settings\General',
+                        'action'     => 'index',
                     ),
                 ),
             ),
@@ -77,6 +94,7 @@ return array(
         'template_map' => array(
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'layout/header'           => __DIR__ . '/../view/admin/common/header.phtml',
+            'layout/message'           => __DIR__ . '/../view/admin/common/message.phtml',
             'layout/sidemenu'           => __DIR__ . '/../view/admin/common/sidemenu.phtml',   
             'layout/footer'           => __DIR__ . '/../view/admin/common/footer.phtml',
             'admin/index'               => __DIR__ . '/../view/admin/admin/index.phtml',

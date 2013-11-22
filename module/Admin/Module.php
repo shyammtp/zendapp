@@ -10,6 +10,32 @@ use Zend\Db\TableGateway\TableGateway;
 
 class Module
 { 
+    public function onBootstrap($e)
+    {
+        $em = $e->getApplication()->getEventManager();
+     
+        $em->attach(\Zend\Mvc\MvcEvent::EVENT_RENDER, function($e) {
+            $flashMessenger = new \Zend\Mvc\Controller\Plugin\FlashMessenger();
+            $vm = $e->getViewModel();
+            if ($flashMessenger->hasSuccessMessages()) {
+               $vm->setVariable('flashSuccessMessages', $flashMessenger->getSuccessMessages());
+            }
+            if ($flashMessenger->hasErrorMessages()) {
+               $vm->setVariable('flashErrorMessages', $flashMessenger->getErrorMessages());
+            }
+        });
+        $sharedEvents = $em->getSharedManager();
+        $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
+            $controller = $e->getTarget();
+            $route = $controller->getEvent()->getRouteMatch();
+                 $e->getViewModel()->setVariables(
+            array('controllerName'=> $route->getParam('__CONTROLLER__', 'index'),
+                    'actionName' => $route->getParam('action', 'index'),
+                    'moduleName' => strtolower(__NAMESPACE__))
+            );
+           }, 100);
+       
+    }
     
     public function getConfig()
     {

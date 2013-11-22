@@ -4,11 +4,17 @@ namespace Core\Model;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\AdapterAwareInterface;
 use Zend\Db\Sql\Sql;
-use Zend\Db\TableGateway\TableGateway;  
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Config\Reader\Xml as Xmlreader; 
 
 class Functions 
-{  
+{
+    
+    const CONFIG_PATH = 'src/Config/';
+    
     protected $_adapter;
+    
+    protected $_settings = array();
     
     protected $_tableGateway;
     
@@ -45,7 +51,8 @@ class Functions
     {
         if(''!=$modelClass)
         {
-            return new $modelClass($arguments);
+            $object = new \ReflectionClass($modelClass);
+            return $object->newInstanceArgs($arguments);
         }
         return false;
     } 
@@ -56,5 +63,26 @@ class Functions
         $table = new \Core\Model\Configuration($this->_tableGateway); 
         return $table->getConfigValue($path);        
     }
+    
+    public function readSettings()
+    {
+        $reader = new Xmlreader();
+        foreach(glob('module/*/'.self::CONFIG_PATH.'settings.xml') as $file)
+        {
+            $data   = $reader->fromFile($file);
+            foreach($data as $key => $settings)
+            {
+                $this->_settings[$key] = $settings;
+            } 
+        }
+        return $this;
+    }
+    
+    public function getSettingForm($index)
+    {
+        $this->readSettings();
+        return isset($this->_settings[$index]) ? $this->_settings[$index] : false;
+    } 
+    
 }
 

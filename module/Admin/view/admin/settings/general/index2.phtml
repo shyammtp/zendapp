@@ -1,0 +1,120 @@
+<?php
+ $this->headLink()->appendStylesheet($this->basePath().'/plugins/select2/select2_metro.css')
+ ->appendStylesheet($this->basePath().'/plugins/chosen-bootstrap/chosen/chosen.css')
+ ->appendStylesheet($this->basePath().'/plugins/jquery-multi-select/css/multi-select-metro.css');?>
+ 
+ <?php
+ //echo \Ething::getSiteConfig('settings/general/default_country'); exit;
+  
+ $form->prepare();
+ ?> 
+<div class="page-header-fixed"> 
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+		<!-- BEGIN PAGE -->
+                <div class="page-content">
+                    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<div id="portlet-config" class="modal hide">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button"></button>
+					<h3>portlet Settings</h3>
+				</div>
+				<div class="modal-body">
+					<p>Here will be a configuration form</p>
+				</div>
+			</div>
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN PAGE CONTAINER-->
+			<div class="container-fluid">
+				<!-- BEGIN PAGE HEADER-->   
+				<div class="row-fluid scroller_anchor">
+					<div class="span12">  
+						<h3 class="page-title">
+							Settings / General settings
+							 <small>advance form layout samples</small>
+						</h3>
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home"></i>
+								<a href="index.html">Home</a> 
+								<span class="icon-angle-right"></span>
+							</li>
+							<li>
+								<a href="#">Form Stuff</a>
+								<span class="icon-angle-right"></span>
+							</li>
+							<li><a href="#">Form Layouts</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- END PAGE HEADER-->
+				<?php if(isset($settingForm['groups'])):?>
+				<div class="row-fluid fixedButton">
+						     <div class="form-actions" style="margin-top:0; border: none;">
+							 <button type="submit" class="btn blue" style="float: right;">Submit</button>
+							 <button type="button" class="btn" style="float: right; margin-right: 5px;">Cancel</button>                            
+						 </div>
+				</div>
+				<?php endif;?>
+				<!-- BEGIN PAGE CONTENT-->
+				<form name="general_settings" action="<?php echo $this->basePath('admin/settings/general/save');?>" method="post" class="form-horizontal">
+				<?php if(isset($settingForm['groups'])): foreach($settingForm['groups'] as $group => $groupval):?>
+ 				<div class="row-fluid">
+					<div class="span12"> 
+						<div class="portlet box <?php echo isset($groupval['class'])?$groupval['class']:"blue";?>">
+							<div class="portlet-title">
+								<div class="caption"><i class="icon-reorder"></i><?php echo $groupval['label'];?></div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"></a>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<!-- BEGIN FORM-->
+								 <?php  foreach($groupval['fields'] as $element):?>
+									<div class="control-group">
+										<label class="control-label"><?php echo $element['label'];?></label>
+																				<div class="controls">
+											<?php echo $this->formElement($form->get($element['name']));?>
+											<?php echo isset($element['comment'])?"<span class='help-inline'>".$element['comment']."</span>":"";?>
+											<?php echo isset($element['comment_block'])?"<span class='help-block'>".$element['comment_block']."</span>":"";?>
+										</div>
+
+									</div> 
+									 <?php endforeach;?>
+									
+								 
+								<!-- END FORM-->       
+							</div>
+						</div>
+
+					</div>
+				</div>
+                                <?php endforeach; endif;?>
+				<input type="hidden" name="current_action" value="<?php echo $this->layout()->actionName;?>" />
+				</form>
+				<!-- END PAGE CONTENT-->         
+			</div>
+			<!-- END PAGE CONTAINER-->
+                </div>
+        </div>
+</div> 
+  <?php  $this->headScript()
+            ->appendFile($this->basePath().  '/plugins/jquery-multi-select/js/jquery.multi-select.js')
+            ->appendFile($this->basePath().  '/plugins/chosen-bootstrap/chosen/chosen.jquery.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js')
+            ->appendFile($this->basePath().  '/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js')
+            ->appendFile($this->basePath().  '/plugins/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js')
+            ->appendFile($this->basePath() . '/js/admin/app.js') 
+            ->appendFile($this->basePath() . '/js/admin/form-components.js')
+            ->appendFile($this->basePath().  '/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
+            ->appendFile($this->basePath().  '/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')
+            ->appendFile($this->basePath().  '/plugins/jquery.input-ip-address-control-1.0.min.js')
+            ->appendFile($this->basePath().  '/plugins/select2/select2.min.js');
+        ?>
+        <script>
+		jQuery(document).ready(function() {    
+		   App.init(); // initlayout and core plugins
+		    FormComponents.init();
+
+		});
+	</script>

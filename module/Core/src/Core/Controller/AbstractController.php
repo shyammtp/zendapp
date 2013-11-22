@@ -3,7 +3,7 @@ namespace Core\Controller;
 
 use Zend\View\Model\ViewModel;
 use Core\Model\Functions;
-use Core\Controller\Main\Functions as Corefunction;
+use Core\Controller\Main\Functions as Corefunction; 
 
 class AbstractController extends Corefunction
 {
@@ -33,6 +33,22 @@ class AbstractController extends Corefunction
     public function getSiteConfig($path)
     {
         return $this->_configurationTable->getConfigValue($path);
+    }
+    
+    public function loadSettingsForm($indexPath)
+    {
+        $settingForm = \Ething::config()->getSettingForm($indexPath);
+        $form = \Ething::getClassInstance('Core\Form\SettingsForm',array('name'))->addFields($settingForm)
+        ->addCountry($this->getCountryTable()->fetchAll())
+        ->load();
+        $form->setData($this->getRequest()->getPost());
+        $bind = array('form' => $form,
+                      'settingForm' => $settingForm);
+        $view = new ViewModel($bind); 
+        $view->setTemplate('admin/settings/general/index2');
+         
+        
+        return $view;
     }
     
 }

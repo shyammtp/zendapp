@@ -89,7 +89,7 @@
 											<select data-placeholder="Choose country" class="chosen span6" multiple="multiple" tabindex="6" name="settings[general][allowed_country][]">
 												<option value=""></option>
 												<?php foreach($countries as $country):
-												$selected = ($configs['settings/general/allowed_country']==$country['code'])? "selected":"";
+												$selected = in_array($country['code'], explode(",",$configs['settings/general/allowed_country']))? "selected":"";
 												?>
                                                                                                 <option value="<?php echo $country['code'];?>" <?php echo $selected;?>><?php echo $country['default_name'];?></option>
 												<?php endforeach;?> 
@@ -150,10 +150,10 @@
 									<div class="control-group">
 										<label class="control-label">Working Days</label>
 																				<div class="controls">
-											<select data-placeholder="Working days" class="chosen span6" multiple="multiple" tabindex="6"    name="settings[general][working_days]">
+											<select data-placeholder="Working days" class="chosen span6" multiple="multiple" tabindex="6"    name="settings[general][working_days][]">
 												<option value=""></option>
 												<?php foreach($workingdays as $key => $days):
-												$selected = ($configs['settings/general/working_days']==$key)? "selected":"";
+												$selected = in_array($key, explode(",",$configs['settings/general/working_days']))? "selected":"";
 												?>
 												<option value="<?php echo $key;?>" <?php echo $selected;?>><?php echo $days;?></option>
 												<?php endforeach;?> 
@@ -201,7 +201,7 @@
 											<select data-placeholder="Choose country" class="chosen span6" tabindex="-1" id="selK2I" name="settings[general][site_country]">
 												<option value=""></option>
 												<?php foreach($countries as $country):
-												$selected = ($configs['settings/general/allowed_country']==$country['code'])? "selected":"";
+												$selected = in_array($country['code'], explode(",",$configs['settings/general/site_country']))? "selected":"";
 												?>
                                                                                                 <option value="<?php echo $country['code'];?>" <?php echo $selected;?>><?php echo $country['default_name'];?></option>
 												<?php endforeach;?> 

@@ -35,19 +35,19 @@ final class Ething
         return self::config()->getClassInstance($modelClass, $arguments);
     }
     
-    public function getLocale()
+    public static function getLocale()
     {
         $localtype = require 'config/autoload/locale.global.php';
         return $localtype;
     }
     
-    public function getTimezones()
+    public static function getTimezones()
     {
         $localtype = require 'config/autoload/timezone.global.php';
         return $localtype;
     }
     
-    public function getSiteConfig($path)
+    public static function getSiteConfig($path)
     { 
         return self::config()->getConfigData($path);
     }
